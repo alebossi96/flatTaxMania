@@ -6,7 +6,7 @@ data.data(Q)=0;
 #reddito -deduzione
 #tasse-detrazione
 ded=1100;
-fascie=[0 10000 15000 26000 55000 75000 120000];
+fasce=[0 10000 15000 26000 55000 75000 120000];
 impNetta=0;
 tot=0;
 nPersone=0;
@@ -16,7 +16,7 @@ for i=1:400
     frequenza=el(charToInt('ak')+2*j-2);
     nPersone+=frequenza;
     ammontare= el(charToInt('ak')+2*j-1);
-    fascia=fascie(j);
+    fascia=fasce(j);
      if frequenza!=0 
        dx= (ammontare/frequenza -fascia)/frequenza;
        for i=1:frequenza
@@ -53,7 +53,7 @@ for i=401:900
     frequenza=el(charToInt('ak')+2*j-2);
     nPersone+=frequenza;
     ammontare= el(charToInt('ak')+2*j-1);
-    fascia=fascie(j);
+    fascia=fasce(j);
      if frequenza!=0 
        dx= (ammontare/frequenza -fascia)/frequenza;
        for i=1:frequenza

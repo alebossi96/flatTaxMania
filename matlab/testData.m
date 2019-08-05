@@ -31,6 +31,6 @@ for i=1:size(data.data)(1)
 end
 
 (tot-impNetta)/impNetta
-fascie=[15e3 0.23; 28e3 0.27; 55e3 0.38; 75e3 0.41;1e10 0.43 ];
-tot=gettitoIrpef(fascie, detr,0)
+fasce=[15e3 0.23; 28e3 0.27; 55e3 0.38; 75e3 0.41;1e10 0.43 ];
+tot=gettitoIrpef(fasce, detr,0)
 (tot-impNetta)/impNetta

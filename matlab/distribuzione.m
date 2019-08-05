@@ -8,7 +8,7 @@ data.data(Q)=0;
 #tasse-detrazione
 ded=1060;
 detr=1652;
-fascie=[0 10000 15000 26000 55000 75000 120000];
+fasce=[0 10000 15000 26000 55000 75000 120000];
 N=4000;
 dist=zeros(N,1);
 
@@ -18,7 +18,7 @@ for k=1:size(data.data)(1)
   for j=1:7
     frequenza=el(charToInt('ak')+2*j-2);
     ammontare= el(charToInt('ak')+2*j-1);
-    fascia=fascie(j);
+    fascia=fasce(j);
      if frequenza!=0 
        dx= (ammontare/frequenza -fascia)/frequenza;
        for i=1:frequenza
