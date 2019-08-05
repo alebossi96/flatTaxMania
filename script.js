@@ -79,7 +79,7 @@ function changeDa(x, val) {
 	len=attivi.length;
 	for( var i = 0; i < len; i++) { 
 		if ( attivi[i] == x) {
-			fasce=parseIntFascie(fasce)
+			fasce=parseIntFasce(fasce)
 			if (val>fasce[i] && val<fasce[i+2]){
 				document.getElementById("da"+attivi[i+1]).value=val;
 				fasce[i+1]=val;
@@ -123,7 +123,7 @@ function changeA(x, val) {
 
 
 function form(i) {
-	return	'<div><form><input type="number" id="da'+i+'" class="input" value='+fasce[i] +' onchange="changeA('+i+',this.value)" step="100"><input type="number" id="a'+i+'" class="input" value='+fascie[i+1] +' step="100" onchange="changeDa('+i+',this.value)"><input type="number" id="al'+i+'" class="input" value='+aliquote[i+1]+' step="0.01"><a href="#" id="'+i+'"class="delete">Delete</a>	<button class="add_form_field" id="btn'+ i+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'; 
+	return	'<div><form><input type="number" id="da'+i+'" class="input" value='+fasce[i] +' onchange="changeA('+i+',this.value)" step="100"><input type="number" id="a'+i+'" class="input" value='+fasce[i+1] +' step="100" onchange="changeDa('+i+',this.value)"><input type="number" id="al'+i+'" class="input" value='+aliquote[i+1]+' step="0.01"><a href="#" id="'+i+'"class="delete">Delete</a>	<button class="add_form_field" id="btn'+ i+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'; 
 }
 
 function parseIntFasce(fasce) {
@@ -161,7 +161,7 @@ $(wrapper).on("click", ".add_form_field", function(e) {
 		}
 
         x=attivi[newEl];
-        $(this).parent('form').parent('div').after('<div><form><input type="number" id="da'+x+'" class="input" value="'+fasce[newEl]+'"onchange="changeA('+x+',this.value)"><input type="number" id="a'+x+'" class="input" value="'+fascie[newEl+1]+'" onchange="changeDa('+x+',this.value)"><input type="number" id="al'+x+'" class="input" value="'+aliquote[newEl]+'"><a href="#" id="'+x+'" class="delete">Delete</a>	<button class="add_form_field" id="btn'+x+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form></div>');
+        $(this).parent('form').parent('div').after('<div><form><input type="number" id="da'+x+'" class="input" value="'+fasce[newEl]+'"onchange="changeA('+x+',this.value)"><input type="number" id="a'+x+'" class="input" value="'+fasce[newEl+1]+'" onchange="changeDa('+x+',this.value)"><input type="number" id="al'+x+'" class="input" value="'+aliquote[newEl]+'"><a href="#" id="'+x+'" class="delete">Delete</a>	<button class="add_form_field" id="btn'+x+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form></div>');
 	
 	} else {
 		attivi.splice(1, 0, attivi[0]+1);
@@ -180,8 +180,7 @@ $(wrapper).on("click", ".add_form_field", function(e) {
 		
 	}
     azione();
-        
- });
+});
 
 $(wrapper).on("click", ".delete", function(e) {
     e.preventDefault();
