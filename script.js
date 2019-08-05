@@ -3,7 +3,8 @@ var infinito=1e20;
 var sizFasce;
 var attivi=[];
 var idDaEli;
-var err =0.02
+var err =0.02;
+
 function inizialize() {
 	var wrapper = $(".container1");
 	fasce=[15e3,28e3,55e3,75e3, infinito];
@@ -12,22 +13,22 @@ function inizialize() {
 	aliquote.unshift(0);
 	sizFasie=fasce.length;
 	
-	i=0
+	i=0;
 	$(wrapper).append('<div><form>da 0 fino a <input type="number" step="100"  id="a'+i+'" class="input" value='+fasce[i+1] +' onchange="changeDa('+i+',this.value)"><input type="number" id="al'+i+'" class="input" value='+aliquote[i+1]+' step="0.01"><a href="#" id="'+i+'"class="delete">Delete</a><button class="add_form_field" id="btn'+ i+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'); //add input box
 		attivi[i]=i;
 	for (i=1;i<sizFasce-2;i++) {
 		$(wrapper).append(form(i));
 		attivi[i]=i;
-		}
-	
-	$(wrapper).append('<div><form><input type="number" id="da'+i+'"  step="100" class="input" value='+fasce[i] +' onchange="changeA('+i+',this.value)">in poi<input type="number" id="al'+i+'" class="input" value='+aliquote[i+1]+' step="0.01"><button class="add_form_field" id="btn'+ i+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'); //add input box
-		attivi[i]=i;
-		
 	}
 	
+	$(wrapper).append('<div><form><input type="number" id="da'+i+'"  step="100" class="input" value='+fasce[i] +' onchange="changeA('+i+',this.value)">in poi<input type="number" id="al'+i+'" class="input" value='+aliquote[i+1]+' step="0.01"><button class="add_form_field" id="btn'+ i+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'); //add input box
+	attivi[i]=i;		
+}
 	
+
 inizialize();
-		
+azione();
+	
 function azione() {
 
 	ded=document.getElementById('ded').value;
@@ -39,7 +40,6 @@ function azione() {
 	for (i=0; i<sizAttivi; i++) {
 		aliquote[i]=document.getElementById('al'+attivi[i]).value;
 	}
-
 
 	fasce=[];
 	fasce.push(0)
@@ -66,12 +66,12 @@ function azione() {
 }
 
 
-azione();
+
 
 var $input = $('.input');
 
 $input.on('change',function() {
- azione();  
+    azione();  
 });
 
 function changeDa(x, val) {
@@ -176,7 +176,7 @@ $(wrapper).on("click", ".add_form_field", function(e) {
 	$(wrapper).append('<div><form>da 0 fino a <input type="number" step="100"  id="a'+x+'" class="input" value='+fasce[i+1] +' onchange="changeDa('+x+',this.value)"><input type="number" id="al'+x+'" class="input" value='+aliquote[i]+' step="0.01"><a href="#" id="'+x+'"class="delete">Delete</a><button class="add_form_field" id="btn'+ x+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'); //add input box
 	i=1;
 	x=attivi[1]
-	$(wrapper).append('<div><form><input type="number" id="da'+x+'"  step="100" class="input" value='+fasce[i] +' onchange="changeA('+x+',this.value)">in poi<input type="number" id="al'+x+'" class="input" value='+aliquote[i]+' step="0.01"><button class="add_form_field" id="btn'+ x+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'); //add input box
+	$(wrapper).append('<div> <form><input type="number" id="da'+x+'"  step="100" class="input" value='+fasce[i] +' onchange="changeA('+x+',this.value)">in poi<input type="number" id="al'+x+'" class="input" value='+aliquote[i]+' step="0.01"><button class="add_form_field" id="btn'+ x+'">&nbsp;<span style="font-size:16px; font-weight:bold;">+ </span></button></form> </div>'); //add input box
 		
 	}
     azione();
