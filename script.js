@@ -18,6 +18,10 @@ const AddFormField = (x) => `
 	</button>
 `;
 
+const InputDa = (i, fascia, value) => `
+	<input type="number" id="da${i}" step="100" class="input" value=${fascia} onchange="changeA(${i}, ${value})">
+`;
+
 function inizialize() {
 	var wrapper = $(".container1");
 	fasce = [15e3, 28e3, 55e3, 75e3, infinito];
@@ -50,7 +54,7 @@ function inizialize() {
 	$(wrapper).append(`
 		<div>
 			<form>
-				<input type="number" id="da${i}"  step="100" class="input" value=${fasce[i]} onchange="changeA(${i},${this.value})">
+				${InputDa(i, fasce[i], this.value)}
 				in poi
 				<input type="number" id="al${i}" class="input" value=${aliquote[i + 1]} step="0.01">
 				${AddFormField(i)}
@@ -165,8 +169,8 @@ function form(i) {
 	return `
 		<div>
 			<form>
-				<input type="number" id="da${i}" class="input" value=${fasce[i]} onchange="changeA(${i}, ${this.value})" step="100">
-					<input type="number" id="a${i}" class="input" value=${fasce[i + 1]} step="100" onchange="changeDa(${i}, ${this.value})">
+				${InputDa(i, fasce[i], this.value)}
+				<input type="number" id="a${i}" class="input" value=${fasce[i + 1]} step="100" onchange="changeDa(${i}, ${this.value})">
 					<input type="number" id="al${i}" class="input" value=${aliquote[i + 1]} step="0.01">
 					<a href="#" id="${i}"class="delete">
 						Delete
@@ -215,7 +219,7 @@ $(document).ready(function () {
 			$(this).parent('form').parent('div').after(`
 				<div>
 					<form>
-						<input type="number" id="da${x}" class="input" value="${fasce[newEl]}"onchange="changeA(${x},${this.value})">
+						${InputDa(x, fasce[newEl + 1], this.value)}
 						<input type="number" id="a${x}" class="input" value="${fasce[newEl + 1]}" onchange="changeDa(${x},${this.value})">
 						<input type="number" id="al${x}" class="input" value="${aliquote[newEl]}">
 						<a href="#" id="${x}" class="delete">
@@ -254,7 +258,7 @@ $(document).ready(function () {
 			$(wrapper).append(`
 				<div> 
 					<form>
-						<input type="number" id="da${x}"  step="100" class="input" value=${fasce[i]} onchange="changeA(${x},${this.value})">
+						${InputDa(x, fasce[i], this.value)}
 						in poi
 						<input type="number" id="al${x}" class="input" value=${aliquote[i]} step="0.01">
 						${AddFormField(x)}
