@@ -22,6 +22,10 @@ const InputDa = (i, fascia, value) => `
 	<input type="number" id="da${i}" step="100" class="input" value=${fascia} onchange="changeA(${i}, ${value})">
 `;
 
+const InputAl = (i, aliquota) => `
+	<input type="number" id="al${i}" class="input" value=${aliquota} step="0.01">
+`;
+
 function inizialize() {
 	var wrapper = $(".container1");
 	fasce = [15e3, 28e3, 55e3, 75e3, infinito];
@@ -36,7 +40,7 @@ function inizialize() {
 			<form>
 				da 0 fino a 
 				<input type="number" step="100"  id="a${i}" class="input" value=${fasce[i + 1]} onchange="changeDa(${i},${this.value})">
-				<input type="number" id="al${i}" class="input" value=${aliquote[i + 1]} step="0.01">
+				${InputAl(i, aliquote[i + 1])}
 				<a href="#" id="${i}"class="delete">
 					Delete
 				</a>
@@ -56,7 +60,7 @@ function inizialize() {
 			<form>
 				${InputDa(i, fasce[i], this.value)}
 				in poi
-				<input type="number" id="al${i}" class="input" value=${aliquote[i + 1]} step="0.01">
+				${InputAl(i, aliquote[i + 1])}
 				${AddFormField(i)}
 			</form> 
 		</div>
@@ -171,11 +175,11 @@ function form(i) {
 			<form>
 				${InputDa(i, fasce[i], this.value)}
 				<input type="number" id="a${i}" class="input" value=${fasce[i + 1]} step="100" onchange="changeDa(${i}, ${this.value})">
-					<input type="number" id="al${i}" class="input" value=${aliquote[i + 1]} step="0.01">
-					<a href="#" id="${i}"class="delete">
-						Delete
-					</a>	
-					${AddFormField(i)}
+				${InputAl(i, aliquote[i + 1])}
+				<a href="#" id="${i}"class="delete">
+					Delete
+				</a>	
+				${AddFormField(i)}
 			</form> 
 		</div>
 	`;
@@ -221,7 +225,7 @@ $(document).ready(function () {
 					<form>
 						${InputDa(x, fasce[newEl + 1], this.value)}
 						<input type="number" id="a${x}" class="input" value="${fasce[newEl + 1]}" onchange="changeDa(${x},${this.value})">
-						<input type="number" id="al${x}" class="input" value="${aliquote[newEl]}">
+						${InputAl(x, aliquote[newEl])}
 						<a href="#" id="${x}" class="delete">
 							Delete
 						</a>	
@@ -245,7 +249,7 @@ $(document).ready(function () {
 					<form>
 						da 0 fino a 
 						<input type="number" step="100"  id="a${x}" class="input" value=${fasce[i + 1]} onchange="changeDa(${x},${this.value})">
-						<input type="number" id="al${x}" class="input" value=${aliquote[i]} step="0.01">
+						${InputAl(x, aliquote[i])}
 						<a href="#" id="${x}"class="delete">
 							Delete
 						</a>
@@ -260,7 +264,7 @@ $(document).ready(function () {
 					<form>
 						${InputDa(x, fasce[i], this.value)}
 						in poi
-						<input type="number" id="al${x}" class="input" value=${aliquote[i]} step="0.01">
+						${InputAl(x, aliquote[i])}
 						${AddFormField(x)}
 					</form> 
 				</div>`); //add input box
