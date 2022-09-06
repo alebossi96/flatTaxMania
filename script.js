@@ -8,6 +8,16 @@ var idDaEli;
 const infinito = 1e20;
 const err = 0.02;
 
+
+const AddFormField = (x) => `
+	<button class="add_form_field" id="btn${x}">
+		&nbsp;
+		<span style="font-size:16px; font-weight:bold;">
+			+ 
+		</span>
+	</button>
+`;
+
 function inizialize() {
 	var wrapper = $(".container1");
 	fasce = [15e3, 28e3, 55e3, 75e3, infinito];
@@ -26,12 +36,7 @@ function inizialize() {
 				<a href="#" id="${i}"class="delete">
 					Delete
 				</a>
-				<button class="add_form_field" id="btn${i}">
-					&nbsp;
-					<span style="font-size:16px; font-weight:bold;">
-						+ 
-					</span>
-				</button>
+				${AddFormField(i)}
 			</form>
 		</div>
 	`); //add input box
@@ -48,12 +53,7 @@ function inizialize() {
 				<input type="number" id="da${i}"  step="100" class="input" value=${fasce[i]} onchange="changeA(${i},${this.value})">
 				in poi
 				<input type="number" id="al${i}" class="input" value=${aliquote[i + 1]} step="0.01">
-				<button class="add_form_field" id="btn${i}">
-					&nbsp;
-					<span style="font-size:16px; font-weight:bold;">
-						+ 
-					</span>
-				</button>
+				${AddFormField(i)}
 			</form> 
 		</div>
 	`); //add input box
@@ -171,12 +171,7 @@ function form(i) {
 					<a href="#" id="${i}"class="delete">
 						Delete
 					</a>	
-					<button class="add_form_field" id="btn${i}">
-						&nbsp;
-						<span style="font-size:16px; font-weight:bold;">
-							+ 
-						</span>
-					</button>
+					${AddFormField(i)}
 			</form> 
 		</div>
 	`;
@@ -226,12 +221,7 @@ $(document).ready(function () {
 						<a href="#" id="${x}" class="delete">
 							Delete
 						</a>	
-						<button class="add_form_field" id="btn${x}">
-							&nbsp;
-							<span style="font-size:16px; font-weight:bold;">
-								+ 
-							</span>
-						</button>
+						${AddFormField(x)}
 					</form>
 				</div>
 			`);
@@ -255,12 +245,7 @@ $(document).ready(function () {
 						<a href="#" id="${x}"class="delete">
 							Delete
 						</a>
-						<button class="add_form_field" id="btn${x}">
-							&nbsp;
-							<span style="font-size:16px; font-weight:bold;">
-								+ 
-							</span>
-						</button>
+						${AddFormField(x)}
 					</form> 
 				</div>
 			`); //add input box
@@ -272,12 +257,7 @@ $(document).ready(function () {
 						<input type="number" id="da${x}"  step="100" class="input" value=${fasce[i]} onchange="changeA(${x},${this.value})">
 						in poi
 						<input type="number" id="al${x}" class="input" value=${aliquote[i]} step="0.01">
-						<button class="add_form_field" id="btn${x}">
-							&nbsp;
-							<span style="font-size:16px; font-weight:bold;">
-								+ 
-							</span>
-						</button>
+						${AddFormField(x)}
 					</form> 
 				</div>`); //add input box
 
