@@ -30,6 +30,12 @@ const InputAl = (i, aliquota) => `
 	<input type="number" id="al${i}" class="input" value=${aliquota} step="0.01">
 `;
 
+const DeleteButton = (i) => `
+	<a href="#" id="${i}"class="delete">
+		Delete
+	</a>
+`;
+
 function inizialize() {
 	var wrapper = $(".container1");
 	fasce = [15e3, 28e3, 55e3, 75e3, infinito];
@@ -45,9 +51,7 @@ function inizialize() {
 				da 0 fino a 
 				${InputA(i, fasce[i + 1], this.value)}
 				${InputAl(i, aliquote[i + 1])}
-				<a href="#" id="${i}"class="delete">
-					Delete
-				</a>
+				${DeleteButton(i)}
 				${AddFormField(i)}
 			</form>
 		</div>
@@ -180,9 +184,7 @@ function form(i) {
 				${InputDa(i, fasce[i], this.value)}
 				${InputA(i, fasce[i + 1], this.value)}
 				${InputAl(i, aliquote[i + 1])}
-				<a href="#" id="${i}"class="delete">
-					Delete
-				</a>	
+				${DeleteButton(i)}
 				${AddFormField(i)}
 			</form> 
 		</div>
@@ -230,9 +232,7 @@ $(document).ready(function () {
 						${InputDa(x, fasce[newEl + 1], this.value)}
 						${InputA(x, fasce[newEl + 1], this.value)}
 						${InputAl(x, aliquote[newEl])}
-						<a href="#" id="${x}" class="delete">
-							Delete
-						</a>	
+						${DeleteButton(x)}
 						${AddFormField(x)}
 					</form>
 				</div>
@@ -254,9 +254,7 @@ $(document).ready(function () {
 						da 0 fino a 
 						${InputA(x, fasce[i + 1], this.value)}
 						${InputAl(x, aliquote[i])}
-						<a href="#" id="${x}"class="delete">
-							Delete
-						</a>
+						${DeleteButton(x)}
 						${AddFormField(x)}
 					</form> 
 				</div>
