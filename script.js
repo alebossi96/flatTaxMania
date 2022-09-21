@@ -8,32 +8,62 @@ var idDaEli;
 const infinito = 1e20;
 const err = 0.02;
 
+const addIcon = `
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+		<path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+	</svg>
+`;
+const dashIcon = `
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+  		<path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+	</svg>
+`;
 
 const AddFormField = (x) => `
-	<button class="add_form_field" id="btn${x}">
-		&nbsp;
-		<span style="font-size:16px; font-weight:bold;">
-			+ 
-		</span>
+	<button type="button" class="btn btn-outline-primary add_form_field form-control" id="btn${x}">
+		${addIcon}
 	</button>
 `;
 
 const InputDa = (i, fascia, value) => `
-	<input type="number" id="da${i}" step="100" class="input" value=${fascia} onchange="changeA(${i}, ${value})">
+	<input type="number" id="da${i}" step="100" class="form-control" value=${fascia} onchange="changeA(${i}, ${value})">
 `;
 
 const InputA = (i, fascia, value) => `
-	<input type="number" step="100" id="a${i}" class="input" value=${fascia} onchange="changeDa(${i},${value})">
+	<input type="number" step="100" id="a${i}" class="form-control" value=${fascia} onchange="changeDa(${i},${value})">
 `;
 
 const InputAl = (i, aliquota) => `
-	<input type="number" id="al${i}" class="input" value=${aliquota} step="0.01">
+	<input type="number" id="al${i}" class="form-control" value=${aliquota} step="0.01">
 `;
 
 const DeleteButton = (i) => `
-	<a href="#" id="${i}"class="delete">
-		Delete
-	</a>
+	<button id="${i} type="button" class="btn btn-outline-danger delete  form-control">
+		${dashIcon}
+	</button>
+`;
+//<input type="number" class="form-control" id="inputPassword2" placeholder="Password">
+
+const formRow = (da, a, al, btnDel, btnAdd ) => `
+	<div>
+		<form class="row g-3">
+			<div class="col-auto">
+				${da}
+			</div>
+			<div class="col-auto">
+				${a}
+			</div>
+			<div class="col-auto">
+				${al}
+			</div>
+			<div class="col-auto">
+				${btnDel}
+			</div>
+			<div class="col-auto">
+				${btnAdd}
+			</div>
+		</form>
+	</div>
 `;
 
 function inizialize() {
@@ -46,15 +76,13 @@ function inizialize() {
 
 	i = 0; ``
 	$(wrapper).append(`
-		<div>
-			<form>
-				da 0 fino a 
-				${InputA(i, fasce[i + 1], this.value)}
-				${InputAl(i, aliquote[i + 1])}
-				${DeleteButton(i)}
-				${AddFormField(i)}
-			</form>
-		</div>
+		${formRow(
+			"da 0 fino a",
+			InputA(i, fasce[i + 1], this.value),
+			InputAl(i, aliquote[i + 1]),
+			DeleteButton(i),
+			AddFormField(i)
+		)}
 	`); //add input box
 
 	attivi[i] = i;
@@ -64,14 +92,13 @@ function inizialize() {
 	}
 
 	$(wrapper).append(`
-		<div>
-			<form>
-				${InputDa(i, fasce[i], this.value)}
-				in poi
-				${InputAl(i, aliquote[i + 1])}
-				${AddFormField(i)}
-			</form> 
-		</div>
+		${formRow(
+			InputDa(i, fasce[i], this.value),
+			"in poi",
+			InputAl(i, aliquote[i + 1]),
+			"",
+			AddFormField(i)
+		)}
 	`); //add input box
 	attivi[i] = i;
 }
@@ -176,18 +203,15 @@ function changeA(x, val) {
 }
 
 
-
 function form(i) {
 	return `
-		<div>
-			<form>
-				${InputDa(i, fasce[i], this.value)}
-				${InputA(i, fasce[i + 1], this.value)}
-				${InputAl(i, aliquote[i + 1])}
-				${DeleteButton(i)}
-				${AddFormField(i)}
-			</form> 
-		</div>
+		${formRow(
+			InputDa(i, fasce[i], this.value),
+			InputA(i, fasce[i + 1], this.value),
+			InputAl(i, aliquote[i + 1]),
+			DeleteButton(i),
+			AddFormField(i)
+		)}
 	`;
 }
 
@@ -226,16 +250,14 @@ $(document).ready(function () {
 			}
 
 			x = attivi[newEl];
-			$(this).parent('form').parent('div').after(`
-				<div>
-					<form>
-						${InputDa(x, fasce[newEl + 1], this.value)}
-						${InputA(x, fasce[newEl + 1], this.value)}
-						${InputAl(x, aliquote[newEl])}
-						${DeleteButton(x)}
-						${AddFormField(x)}
-					</form>
-				</div>
+			$(this).parent('div').parent('form').parent('div').after(`
+				${formRow(
+					InputDa(x, fasce[newEl + 1], this.value),
+					InputA(x, fasce[newEl + 1], this.value),
+					InputAl(x, aliquote[newEl]),
+					DeleteButton(x),
+					AddFormField(x)
+				)}
 			`);
 
 		} else {
@@ -243,33 +265,31 @@ $(document).ready(function () {
 			fasce.splice(1, 0, 55000);
 			aliquote.splice(0, 0, parseFloat(aliquote[0]) / 2);
 
-			$(this).parent('form').parent('div').remove();
+			$(this).parent('div').parent('form').parent('div').remove();
 			sizFasce = fasce.length;
 			i = 0
 			x = attivi[0];
 
 			$(wrapper).append(`
-				<div>
-					<form>
-						da 0 fino a 
-						${InputA(x, fasce[i + 1], this.value)}
-						${InputAl(x, aliquote[i])}
-						${DeleteButton(x)}
-						${AddFormField(x)}
-					</form> 
-				</div>
+				${formRow(
+					"da 0 fino a",
+					InputA(x, fasce[i + 1], this.value),
+					InputAl(x, aliquote[i]),
+					DeleteButton(x),
+					AddFormField(x)
+				)}
 			`); //add input box
 			i = 1;
 			x = attivi[1]
 			$(wrapper).append(`
-				<div> 
-					<form>
-						${InputDa(x, fasce[i], this.value)}
-						in poi
-						${InputAl(x, aliquote[i])}
-						${AddFormField(x)}
-					</form> 
-				</div>`); //add input box
+				${formRow(
+					InputDa(x, fasce[i], this.value),
+					"in poi",
+					InputAl(x, aliquote[i]),
+					"",
+					AddFormField(x)
+				)}
+			`); //add input box
 
 		}
 		azione();
@@ -286,7 +306,7 @@ $(document).ready(function () {
 			}
 		}
 
-		$(this).parent('form').parent('div').remove();
+		$(this).parent('div').parent('form').parent('div').remove();
 		prox = attivi[k];
 		document.getElementById("da" + prox).value = fasce[k];
 		azione();
